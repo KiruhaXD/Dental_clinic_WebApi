@@ -10,15 +10,13 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
-        builder.Services.AddDbContext<PatientDb>();
-        builder.Services.AddDbContext<SpecializationDoctorDb>();
-        builder.Services.AddDbContext<DoctorsDb>();
-        builder.Services.AddDbContext<RecordOnReceivingDb>();
-        builder.Services.AddDbContext<DestinationDb>();
-        builder.Services.AddDbContext<ServicesDb>();
-        builder.Services.AddDbContext<ListOfDiseasesDb>();
-        builder.Services.AddDbContext<PatientCardDb>();
-        builder.Services.AddDbContext<ReceivingTypeDb>();
+        builder.Services.AddDbContext<ConsumptionDb>();
+        builder.Services.AddDbContext<DrugsDb>();
+        builder.Services.AddDbContext<DepartmentsDb>();
+        builder.Services.AddDbContext<InventoryDb>();
+        builder.Services.AddDbContext<SuppliersDb>();
+        builder.Services.AddDbContext<SupplyDb>();
+        builder.Services.AddDbContext<UsersDb>();
         /*(opt =>
         {
             opt.UseSqlServer(builder.Configuration.GetConnectionString("Dental_clinic"));
@@ -37,15 +35,13 @@ public class Program
             db.Database.EnsureCreated();*/
         }
 
-        app.MapEntityEndpoints<Patients, PatientDb>("/patients"); 
-        app.MapEntityEndpoints<Doctors, DoctorsDb>("/doctors");
-        app.MapEntityEndpoints<Specialization_doctor, SpecializationDoctorDb>("/specializ_doctor");
-        app.MapEntityEndpoints<Records_on_receiving, RecordOnReceivingDb>("/recordonreceiv");
-        app.MapEntityEndpoints<Destination, DestinationDb>("/destination");
-        app.MapEntityEndpoints<Services, ServicesDb>("/services");
-        app.MapEntityEndpoints<List_of_diseases, ListOfDiseasesDb>("/listdiseases");
-        app.MapEntityEndpoints<Patient_card, PatientCardDb>("/patientcard");
-        app.MapEntityEndpoints<Receiving_type, ReceivingTypeDb>("/receivingtype");
+        app.MapEntityEndpoints<Consumption, ConsumptionDb>("/consumption"); 
+        app.MapEntityEndpoints<Departments, DepartmentsDb>("/departments");
+        app.MapEntityEndpoints<Drugs, DrugsDb>("/drugs");
+        app.MapEntityEndpoints<Inventory, InventoryDb>("/inventory");
+        app.MapEntityEndpoints<Suppliers, SuppliersDb>("/suppliers");
+        app.MapEntityEndpoints<Supply, SupplyDb>("/supply");
+        app.MapEntityEndpoints<Users, UsersDb>("/users");
         app.Run();
     }
 }
@@ -80,7 +76,7 @@ public static class EntityEndpoints
         {
             var existingEntity = await dbContext.Set<TEntity>().FindAsync(id);
             if (existingEntity == null) return Results.NotFound();
-            dbContext.Entry(existingEntity).CurrentValues.SetValues(existingEntity);
+            dbContext.Entry(existingEntity).CurrentValues.SetValues(entit);
             await dbContext.SaveChangesAsync();
             return Results.Ok(entit);
         });

@@ -6,57 +6,41 @@ namespace Dental_clinic_WebApi.Data
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            /* try
-             {*/
-            optionsBuilder.UseSqlServer("Data Source=DESKTOP-HIOKBS7;Initial Catalog=Dental_clinic;Integrated Security=True; Trusted_Connection=True; TrustServerCertificate=True");
-            /* }
-             catch (Exception ex) { 
-                 Console.WriteLine(ex.ToString());
-             }*/
+            optionsBuilder.UseSqlServer("Data Source=DESKTOP-HIOKBS7;Initial Catalog=Drug_treatment_clinic;Integrated Security=True; Trusted_Connection=True; TrustServerCertificate=True");
         }
     }
-    public class PatientDb : BaseDbContext
+    public class ConsumptionDb : BaseDbContext
     {
-        public DbSet<Patients> Patients => Set<Patients>();
+        public DbSet<Consumption> Patients => Set<Consumption>();
     }
 
-    public class DoctorsDb : BaseDbContext 
+    public class DepartmentsDb : BaseDbContext 
     {
-        public DbSet<Doctors> Doctors => Set<Doctors>();
+        public DbSet<Departments> Doctors => Set<Departments>();
     }
 
-    public class SpecializationDoctorDb : BaseDbContext
+    public class DrugsDb : BaseDbContext
     {
-        public DbSet<Specialization_doctor> SpecializationDoctor => Set<Specialization_doctor>();
+        public DbSet<Drugs> SpecializationDoctor => Set<Drugs>();
     }
 
-    public class RecordOnReceivingDb : BaseDbContext
+    public class InventoryDb : BaseDbContext
     {
-        public DbSet<Records_on_receiving> Record => Set<Records_on_receiving>();
+        public DbSet<Inventory> Record => Set<Inventory>();
     }
 
-    public class DestinationDb : BaseDbContext
+    public class SuppliersDb : BaseDbContext
     {
-        public DbSet<Destination> Destination => Set<Destination>();
+        public DbSet<Suppliers> Destination => Set<Suppliers>();
     }
 
-    public class ServicesDb : BaseDbContext
+    public class SupplyDb : BaseDbContext
     {
-        public DbSet<Services> Services => Set<Services>();
+        public DbSet<Supply> Services => Set<Supply>();
     }
 
-    public class ListOfDiseasesDb : BaseDbContext
+    public class UsersDb : BaseDbContext
     {
-        public DbSet<List_of_diseases> Listdiseases => Set<List_of_diseases>();
-    }
-
-    public class PatientCardDb : BaseDbContext
-    {
-        public DbSet<Patient_card> PatientCard => Set<Patient_card>();
-    }
-
-    public class ReceivingTypeDb : BaseDbContext
-    {
-        public DbSet<Receiving_type> DReceiving => Set<Receiving_type>();
+        public DbSet<Users> Listdiseases => Set<Users>();
     }
 }
